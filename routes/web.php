@@ -13,9 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
+Route::get('/', function () {
+    return view('welcome1');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+Route::get('/articles/{article}', 'ArticleController@show');
+Route::get('/articles','ArticleController@index');
+Route::get('/about',function ()
+{
+    //$article=App\Article::take(1)->get();
+    //$article=App\Article::paginate(1);
+    $article=App\Article::take(2)->latest('updated_at')->get();
+    return view('about',['articles'=>$article]);
+});
 /*Route::get('test',function (){
     $name=request('name');
 
@@ -37,3 +50,7 @@ use Illuminate\Support\Facades\Route;
 });*/
 Route::get('/post/{post}','PostsController@show');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
