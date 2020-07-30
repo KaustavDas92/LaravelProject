@@ -3,14 +3,16 @@
 
     <div id="wrapper">
         <div id="page" class="container">
-            @foreach($articles as $art)
+            @forelse($articles as $art)
             <div id="content">
                 <div class="title">
-                    <h2><a href="/articles/{{$art->id}}">{{$art->Title}}</a></h2>
+                    <h2><a href="{{$art->path()}}">{{$art->Title}}</a></h2>
                 </div>
                     <p><img src="/images/banner.jpg" alt="" class="image image-full" /> </p>
                     <p>{{$art->excerpt}}</p>
-                    @endforeach
+                @empty
+                    <p> No Articles Found</p>
+                    @endforelse
 
             </div>
         </div>
