@@ -13,13 +13,39 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*app()->bind('example',function ()
+{
+    $foo=config('services.foo');
+    return new \App\Example($foo);
+});*/
+
 Route::get('/', function () {
     return view('welcome1');
 });
 
-Route::get('/contact', function () {
-    return view('contact');
-});
+Route::get('/container','PagesController@home');
+
+//Route::get('/container',function ()
+//{
+   /*$container=new App\Containers();
+   $container->bind('example',function ()
+   {
+       return new App\Example();
+   });
+   $example=$container->getBindings('example');
+   //ddd($example);
+    $example->go();*/
+
+    //$example=resolve('example');
+
+  //  $example=resolve(App\Example::class);
+   // ddd($example);
+//});
+Route::get('/contact', 'ContactController@show');
+Route::post('/contact','ContactController@store');
+
+
+
 Route::get('/articles','ArticleController@index')->name('articles.index');
 Route::post('/articles','ArticleController@store');
 Route::get('/articles/create','ArticleController@create');
